@@ -11,7 +11,7 @@ int main()
     int len = 10;
     int* array = criarArray(len);
     
-    printf("--------NÃƒO ORDENADO--------\n");
+    printf("--------NÃO ORDENADO--------\n");
     for(int i = 0; i < len; i++){
         printf("(%i) -> %i\n", i, array[i]);
     }
