@@ -1,14 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int* criarArray(int tamanho){
-    int* array = (int*) malloc(sizeof(*array)*tamanho);
-    for(int i = 0; i < tamanho; i++){
-        array[i] = rand() % 100;
-    }
-    
-    return array;
-}
+#include "../../arrayAssets/arrayAssets.h"
+#include "../../arrayAssets/arrayAssets.c"
 
 void trocar(int *a, int *b){
     int temp = *a;
@@ -43,16 +37,12 @@ int main(){
     int* array = criarArray(len);
     
     printf("--------NÃO ORDENADO--------\n");
-    for(int i = 0; i < len; i++){
-        printf("(%i) -> %i\n", i, array[i]);
-    }
+    imprimeArray(array, len);
 
     quicksort(array, 0, len - 1);
     
     printf("----------ORDENADO----------\n");
-    for(int i = 0; i < len; i++){
-        printf("(%i) -> %i\n", i, array[i]);
-    }
+    imprimeArray(array, len);
     
     free(array);
     return 0;
