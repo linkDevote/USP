@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <limits.h>
 
-int* criarArray(int tamanho);
+#include "../../arrayAssets/arrayAssets.h"
+#include "../../arrayAssets/arrayAssets.c"
+
 void merge(int* array, int ini, int mid, int end);
 void mergeSort(int* array, int ini, int end);
 
@@ -12,28 +14,15 @@ int main()
     int* array = criarArray(len);
     
     printf("--------NÃO ORDENADO--------\n");
-    for(int i = 0; i < len; i++){
-        printf("(%i) -> %i\n", i, array[i]);
-    }
+    imprimeArray(array, len);
 
     mergeSort(array, 0, len - 1);
     
     printf("----------ORDENADO----------\n");
-    for(int i = 0; i < len; i++){
-        printf("(%i) -> %i\n", i, array[i]);
-    }
+    imprimeArray(array, len);
     
     free(array);
     return 0;
-}
-
-int* criarArray(int tamanho){
-    int* array = (int*) malloc(sizeof(*array)*tamanho);
-    for(int i = 0; i < tamanho; i++){
-        array[i] = rand() % 100;
-    }
-    
-    return array;
 }
 
 void merge(int* array, int ini, int mid, int end){
@@ -71,10 +60,15 @@ void merge(int* array, int ini, int mid, int end){
 }
 
 void mergeSort(int* array, int ini, int end){
-    if(ini < end){
-        int mid = (ini + end)/2;
-        mergeSort(array, ini, mid);
-        mergeSort(array, mid + 1, end);
-        merge(array, ini, mid, end);
+    for (int curr_size = 1; curr_size <= end - ini; curr_size = 2 * curr_size) {
+        
+        for (int left_start = ini; left_start < end; left_start += 2 * curr_size) {
+            int mid = left_start + curr_size - 1;
+            
+            if (mid < end) {
+                int right_end = (left_start + 2 * curr_size - 1 < end) ? (left_start + 2 * curr_size - 1) : end;
+                merge(array, left_start, mid, right_end);
+            }
+        }
     }
 }
