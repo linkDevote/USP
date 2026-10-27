@@ -6,7 +6,7 @@ typedef int Elemento;
 
 typedef struct {
 
-	Elemento * a;
+	Elemento* a;
 	int livre;
 	int capacidade;
 
